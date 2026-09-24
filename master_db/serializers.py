@@ -13,7 +13,7 @@ from collections.abc import Mapping
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
-from rest_framework.fields import empty, get_error_detail, set_value
+from rest_framework.fields import empty, get_error_detail
 from rest_framework.settings import api_settings
 from rest_framework.exceptions import ValidationError as DRFValidationError
 
@@ -220,7 +220,7 @@ class EnhancedModelSerializer(serializers.ModelSerializer):
             except serializers.SkipField:
                 pass
             else:
-                set_value(ret, field.source_attrs, validated_value)
+                self.set_value(ret, field.source_attrs, validated_value)
 
         if errors:
             raise DRFValidationError(errors)
